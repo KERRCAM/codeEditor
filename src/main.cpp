@@ -1,16 +1,14 @@
+// LIBRARY IMPORTS
 #include <stdio.h>
 #include <SDL2/SDL.h>
 
+// LOCAL IMPORTS
+#include <include/globals.h>
 
 //-----------------------------------------------------------------------------------------------//
 
-const double FRAME_RATE = 1.0 / 60.0;
-const int WINDOW_WIDTH = 800;
-const int WINDOW_HEIGHT = 600;
-
 SDL_Window* window = NULL;
 SDL_Renderer* renderer = NULL;
-int gameRunning = 0;
 
 //-----------------------------------------------------------------------------------------------//
 
@@ -107,10 +105,10 @@ int main(){
 
     setup();
 
-    while (gameRunning){
+    while (running){
         processInput();
-        update();
-        render();
+        //update();
+        //render();
     }
 
     destroyWindow();
