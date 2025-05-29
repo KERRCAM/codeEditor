@@ -28,6 +28,9 @@ std::string name;
 SDL_Window* window = NULL;
 SDL_Renderer* renderer = NULL;
 int running;
+int width;
+int height;
+
 
 int initialiseWindow(void);
 void processInput();

@@ -1,29 +1,19 @@
-#ifndef INPUT_H
-#define INPUT_H
+#ifndef KEYMAPS_H
+#define KEYMAPS_H
 #pragma once
 
 // LIBRARY IMPORTS
 #include <SDL2/SDL.h>
-#include <string>
-#include <vector>
+#include <map>
 
 // LOCAL IMPORTS
 
 
 //-----------------------------------------------------------------------------------------------//
-// CLASS - FUNCTIONS + ATTRIBUTES
 
-class Input{
-
-public:
-
-
-private:
-std::vector<SDL_Event> eventBuffer;
-
-protected:
-
-
+std::map<SDL_Event, char> keyMaps = {
+    {SDLD_a, 'a'},
+    {SDLK_b, 'b'},
 };
 
 //-----------------------------------------------------------------------------------------------//
