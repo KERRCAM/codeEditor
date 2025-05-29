@@ -4,7 +4,6 @@
 
 // LIBRARY IMPORTS
 #include <SDL2/SDL.h>
-#include <string>
 #include <vector>
 
 // LOCAL IMPORTS
@@ -20,6 +19,8 @@ public:
 
 private:
 std::vector<SDL_Event> eventBuffer;
+
+void getInput();
 
 protected:
 
