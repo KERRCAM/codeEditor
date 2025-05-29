@@ -13,6 +13,7 @@
 #define WINDOW_WIDTH 1512
 #define WINDOW_HEIGHT 982
 #define REFRESH_RATE 1.0 / 120.0
+
 //-----------------------------------------------------------------------------------------------//
 // STRUCTS AND VARIABLES
 

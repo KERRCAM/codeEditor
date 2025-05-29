@@ -3,7 +3,7 @@
 #include <SDL2/SDL.h>
 
 // LOCAL IMPORTS
-#include <include/globals.h>
+#include "include/globals.h"
 
 //-----------------------------------------------------------------------------------------------//
 
@@ -52,11 +52,11 @@ void processInput(){
 
     switch (event.type){
         case SDL_QUIT:
-            gameRunning = 0;
+            running = 0;
             break;
         case SDL_KEYDOWN:
             if (event.key.keysym.sym == SDLK_ESCAPE){
-                gameRunning = 0;
+                running = 0;
             }
             break;
     }
@@ -101,7 +101,7 @@ void setup(){
 
 int main(){
 
-    gameRunning = initialize_window();
+    running = initialize_window();
 
     setup();
 
