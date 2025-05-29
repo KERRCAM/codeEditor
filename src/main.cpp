@@ -1,11 +1,15 @@
 // LIBRARY IMPORTS
-#include <stdio.h>
+#include <iostream>
 #include <SDL2/SDL.h>
 
 // LOCAL IMPORTS
 #include "include/globals.h"
+#include "include/manager.h"
+#include "include/input.h"
+#include "include/keyMaps.h"
 
 //-----------------------------------------------------------------------------------------------//
+
 
 SDL_Window* window = NULL;
 SDL_Renderer* renderer = NULL;
@@ -50,32 +54,22 @@ void processInput(){
     SDL_Event event;
     SDL_PollEvent(&event);
 
+
+
     switch (event.type){
         case SDL_QUIT:
             running = 0;
             break;
         case SDL_KEYDOWN:
+            //std::cout << "scancode: " << event.key.keysym.scancode << std::endl;
+            //std::cout << "sym: " << event.key.keysym.sym << std::endl;
+            //std::cout << "mod: " << event.key.keysym.mod << std::endl;
+            //std::cout << std::endl;
             if (event.key.keysym.sym == SDLK_ESCAPE){
                 running = 0;
             }
             break;
     }
-
-}
-
-//-----------------------------------------------------------------------------------------------//
-
-void update(){
-
-    //TODO
-
-}
-
-//-----------------------------------------------------------------------------------------------//
-
-void render(){
-
-    //TODO
 
 }
 
@@ -91,29 +85,20 @@ void destroyWindow(){
 
 //-----------------------------------------------------------------------------------------------//
 
-void setup(){
-
-    //TODO
-
-}
-
-//-----------------------------------------------------------------------------------------------//
-
 int main(){
+
+
 
     running = initialize_window();
 
-    setup();
+
 
     while (running){
         processInput();
-        //update();
-        //render();
+
     }
 
     destroyWindow();
 
     return 0;
 }
-
-//-----------------------------------------------------------------------------------------------//

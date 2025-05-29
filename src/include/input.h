@@ -15,12 +15,12 @@
 class Input{
 
 public:
-
+    void getInput(SDL_Event event);
 
 private:
-std::vector<SDL_Event> eventBuffer;
+    std::vector<SDL_Event> eventBuffer;
 
-void getInput();
+    //void getInput(SDL_Event event);
 
 protected:
 
