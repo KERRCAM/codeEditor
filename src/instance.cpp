@@ -1,5 +1,6 @@
 // LIBRARY IMPORTS
 #include <SDL2/SDL.h>
+#include <iostream>
 
 // LOCAL IMPORTS
 #include "include/instance.h"
@@ -50,7 +51,13 @@ void Instance::processInput(){
         running = 0;
         break;
     case SDL_KEYDOWN:
-        if (event.key.keysym.sym == SDLK_ESCAPE){ running = 0;}
+        std::cout << "scancode: " << event.key.keysym.scancode << std::endl;
+        //std::cout << "sym: " << event.key.keysym.sym << std::endl;
+        //std::cout << "mod: " << event.key.keysym.mod << std::endl;
+        //std::cout << std::endl;
+        if (event.key.keysym.sym == SDLK_ESCAPE){
+            running = 0;
+        }
         break;
     }
 

@@ -18,7 +18,10 @@
 class Instance{
 
 public:
-    Instance(std::string n, int r) : name(n), running(r) {}
+    Instance(std::string n, int w, int h, int r) : name(n), width(w), height(h), running(r) { running = initialiseWindow();}
+    int isRunning(){ return running;}
+    void processInput();
+    void render();
 
 private:
     std::vector<std::string*> files;
@@ -27,14 +30,11 @@ private:
     std::string name;
     SDL_Window* window = NULL;
     SDL_Renderer* renderer = NULL;
-    int running;
     int width;
     int height;
-
+    int running;
 
     int initialiseWindow(void);
-    void processInput();
-    void render();
     void destroyWindow();
 
 protected:
