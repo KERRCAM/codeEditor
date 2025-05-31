@@ -20,7 +20,7 @@ private:
 std::vector<Instance*> instances;
 Instance* currentInstance;
 
-void addInstance(Instance* instance){ instances.push_back(instance);}
+void addInstance();
 void setCurrentInstance(Instance* instance){ currentInstance = instance;}
 
 protected:

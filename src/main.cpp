@@ -17,8 +17,8 @@ int main(){
 
     Instance* i1 = new Instance("i1", 800, 500, 1);
 
-    //Manager* manager = new Manager();
-    //manager -> addInstance(i1);
+    Manager* manager = new Manager();
+    manager -> addInstance();
 
     while (i1 -> isRunning()){
         i1 -> processInput();
