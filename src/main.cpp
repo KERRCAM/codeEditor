@@ -98,13 +98,10 @@ void processInput(){
 
     switch (event.type){
     case SDL_QUIT:
-        running = 0;
+        gameRunning = 0;
         break;
     case SDL_KEYDOWN:
         eventBuffer.push_back(event);
-        //std::cout << "scancode: " << event.key.keysym.scancode << std::endl;
-        //std::cout << "sym: " << event.key.keysym.sym << std::endl;
-        //std::cout << "mod: " << event.key.keysym.mod << std::endl;
         std::cout << std::endl;
 
         for (const auto& event : eventBuffer){
@@ -114,7 +111,7 @@ void processInput(){
         std::cout << std::endl;
 
         if (event.key.keysym.sym == SDLK_ESCAPE){
-            running = 0;
+            gameRunning = 0;
         }
         break;
     }
@@ -155,12 +152,13 @@ void render(){
     SDL_SetRenderDrawColor(renderer, 0, 0, 60, 255);
     SDL_RenderClear(renderer);
 
-    int x = 150;
-    SDL_Rect squareRect = { x, x, 10, 10 };
 
-
-    SDL_SetRenderDrawColor(renderer, x, x, x, 255);
-    SDL_RenderFillRect(renderer, &squareRect);
+    for (const auto& event : eventBuffer){
+        int x = event.key.keysym.scancode;
+        SDL_Rect squareRect = { x * 5, x * 5, 50, 50 };
+        SDL_SetRenderDrawColor(renderer, x, x * 2 % 255, x * 3 % 255, 255);
+        SDL_RenderFillRect(renderer, &squareRect);
+    }
 
     SDL_RenderPresent(renderer);
 
