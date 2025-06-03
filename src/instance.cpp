@@ -51,6 +51,7 @@ void Instance::processInput(){
         running = 0;
         break;
     case SDL_KEYDOWN:
+        eventBuffer.push_back(event);
         std::cout << "scancode: " << event.key.keysym.scancode << std::endl;
         //std::cout << "sym: " << event.key.keysym.sym << std::endl;
         //std::cout << "mod: " << event.key.keysym.mod << std::endl;

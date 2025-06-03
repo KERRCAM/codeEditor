@@ -26,6 +26,7 @@ public:
 private:
     std::vector<std::string*> files;
     std::map<std::string, std::tuple<int, int>> bpLocations;
+    std::vector<SDL_Event> eventBuffer;
     std::string currentFile;
     std::string name;
     SDL_Window* window = NULL;
