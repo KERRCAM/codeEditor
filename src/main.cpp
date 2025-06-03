@@ -1,6 +1,7 @@
 // LIBRARY IMPORTS
 #include <iostream>
 #include <SDL2/SDL.h>
+#include <vector>
 
 // LOCAL IMPORTS
 #include "include/globals.h"
@@ -10,18 +11,197 @@
 
 //-----------------------------------------------------------------------------------------------//
 
-int main(){
+//int main(){
+//
+//    Instance* i1 = new Instance("i1", 800, 500, 1);
+//
+//    Manager* manager = new Manager(); // TODO - need to setup multiple windows simultaneous inputs
+//    manager -> addInstance();
+//
+//    int lastFrame = SDL_GetTicks();
+//
+//    while (i1 -> isRunning()){
+////        if (SDL_GetTicks() - lastFrame > REFRESH_RATE){
+////            i1 -> render();
+////        }
+//        SDL_RenderClear(i1 -> renderer);
+//        i1 -> processInput();
+//        SDL_RenderPresent(i1 -> renderer);
+//
+//
+//    }
+//
+//    return 0;
+//}
 
-    Instance* i1 = new Instance("i1", 800, 500, 1);
+//-----------------------------------------------------------------------------------------------//
 
-    Manager* manager = new Manager(); // TODO - need to setup multiple windows simultaneous inputs
-    manager -> addInstance();
 
-    while (i1 -> isRunning()){
-        i1 -> processInput();
+
+//-----------------------------------------------------------------------------------------------//
+// INITIALISATIONS
+
+std::vector<SDL_Event> eventBuffer;
+
+SDL_Window* window = NULL;
+SDL_Renderer* renderer = NULL;
+
+int gameRunning = 0;
+int lastFrame = 0;
+int endScreen = 0;
+
+//-----------------------------------------------------------------------------------------------//
+
+int initialize_window(void){
+    /*
+    Sets up game winodw.
+    */
+
+    if (SDL_Init(SDL_INIT_EVERYTHING) != 0){
+        fprintf(stderr, "Error initialising SDL\n");
+        return 0;
     }
 
+    window = SDL_CreateWindow(
+        "TEST BUILD",
+        SDL_WINDOWPOS_CENTERED,
+        SDL_WINDOWPOS_CENTERED,
+        WINDOW_WIDTH,
+        WINDOW_HEIGHT,
+        SDL_WINDOW_RESIZABLE
+    );
+
+    SDL_WarpMouseInWindow(window, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+
+    if (!window){
+        fprintf(stderr, "Error creating SDL window\n");
+        return 0;
+    }
+
+    // -1 for default driver, 0 for no flags
+    renderer = SDL_CreateRenderer(window, -1, 0);
+    if (!renderer){
+        fprintf(stderr, "Error creating SDL renderer\n");
+        return 0;
+    }
+
+    return 1;
+}
+
+//-----------------------------------------------------------------------------------------------//
+
+void processInput(){
+
+
+    SDL_Event event;
+    SDL_PollEvent(&event);
+
+    switch (event.type){
+    case SDL_QUIT:
+        running = 0;
+        break;
+    case SDL_KEYDOWN:
+        eventBuffer.push_back(event);
+        //std::cout << "scancode: " << event.key.keysym.scancode << std::endl;
+        //std::cout << "sym: " << event.key.keysym.sym << std::endl;
+        //std::cout << "mod: " << event.key.keysym.mod << std::endl;
+        std::cout << std::endl;
+
+        for (const auto& event : eventBuffer){
+            std::cout << ", " << event.key.keysym.scancode;
+        }
+
+        std::cout << std::endl;
+
+        if (event.key.keysym.sym == SDLK_ESCAPE){
+            running = 0;
+        }
+        break;
+    }
+
+}
+
+//-----------------------------------------------------------------------------------------------//
+
+void setup(){
+    /*
+    Sets up so global values for the game and initialises various game aspects.
+     */
+
+}
+
+//-----------------------------------------------------------------------------------------------//
+
+void update(){
+    /*
+    Handles all required game updates ran each frame.
+    */
+
+    /* // ONLY NEEDED FOR A CAPPED FRAME RATE
+    int waitTime = FRAME_TIME - (SDL_GetTicks() / lastFrame);
+    if (waitTime > 0 && waitTime < FRAME_TIME){ SDL_Delay(waitTime); }
+    */
+
+}
+
+//-----------------------------------------------------------------------------------------------//
+
+void render(){
+    /*
+    Handle all render calls for the game.
+    */
+
+    // Screen colour
+    SDL_SetRenderDrawColor(renderer, 0, 0, 60, 255);
+    SDL_RenderClear(renderer);
+
+    int x = 150;
+    SDL_Rect squareRect = { x, x, 10, 10 };
+
+
+    SDL_SetRenderDrawColor(renderer, x, x, x, 255);
+    SDL_RenderFillRect(renderer, &squareRect);
+
+    SDL_RenderPresent(renderer);
+
+}
+
+//-----------------------------------------------------------------------------------------------//
+
+void destroyWindow(){
+    /*
+    Destorys game renderer and window.
+    */
+
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+
+}
+
+//-----------------------------------------------------------------------------------------------//
+
+int main(){
+    /*
+    Main game loop.
+    */
+
+    gameRunning = initialize_window();
+
+    setup();
+
+    // Game loop, on player death the score pauses all updates stop, but the game continues to
+    // to render so the player can see their score and take input so they can quit the window.
+    while (gameRunning){
+        processInput();
+        update();
+        render();
+    }
+
+    destroyWindow();
+
     return 0;
+
 }
 
 //-----------------------------------------------------------------------------------------------//

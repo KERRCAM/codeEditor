@@ -22,6 +22,8 @@ public:
     int isRunning(){ return running;}
     void processInput();
     void render();
+    SDL_Window* window = NULL;
+    SDL_Renderer* renderer = NULL;
 
 private:
     std::vector<std::string*> files;
@@ -29,8 +31,7 @@ private:
     std::vector<SDL_Event> eventBuffer;
     std::string currentFile;
     std::string name;
-    SDL_Window* window = NULL;
-    SDL_Renderer* renderer = NULL;
+
     int width;
     int height;
     int running;

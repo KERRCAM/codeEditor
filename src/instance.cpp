@@ -43,6 +43,14 @@ int Instance::initialiseWindow(void){
 
 void Instance::processInput(){
 
+    int x = 150;
+    SDL_Rect squareRect = { x, x, 10, 10 };
+
+
+    SDL_SetRenderDrawColor(renderer, x, x, x, 255);
+    SDL_RenderFillRect(renderer, &squareRect);
+
+
     SDL_Event event;
     SDL_PollEvent(&event);
 
@@ -52,15 +60,24 @@ void Instance::processInput(){
         break;
     case SDL_KEYDOWN:
         eventBuffer.push_back(event);
-        std::cout << "scancode: " << event.key.keysym.scancode << std::endl;
+        //std::cout << "scancode: " << event.key.keysym.scancode << std::endl;
         //std::cout << "sym: " << event.key.keysym.sym << std::endl;
         //std::cout << "mod: " << event.key.keysym.mod << std::endl;
-        //std::cout << std::endl;
+        std::cout << std::endl;
+
+        for (const auto& event : eventBuffer){
+            std::cout << ", " << event.key.keysym.scancode;
+        }
+
+        std::cout << std::endl;
+
         if (event.key.keysym.sym == SDLK_ESCAPE){
             running = 0;
         }
         break;
     }
+
+
 
 }
 
@@ -68,7 +85,26 @@ void Instance::processInput(){
 
 void Instance::render(){
 
-    //WIP
+    SDL_RenderClear(renderer);
+
+    if (eventBuffer.size() > 0){
+        SDL_Event event = eventBuffer.back();
+        eventBuffer.pop_back();
+
+        int x = event.key.keysym.scancode;
+
+        SDL_SetRenderDrawColor(renderer, x, x, x, 255);
+        SDL_RenderDrawPoint(renderer, x, x);
+
+        SDL_Rect squareRect = { x, x, 10, 10 };
+
+        SDL_SetRenderDrawColor(renderer, x, x, x, 255);
+        SDL_RenderFillRect(renderer, &squareRect);
+
+    }
+
+    SDL_RenderPresent(renderer);
+
 
 }
 
