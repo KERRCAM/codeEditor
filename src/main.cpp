@@ -17,14 +17,12 @@ int main(){
 
     Instance* i1 = new Instance("i1", 800, 500, 1);
 
-    Manager* manager = new Manager();
+    Manager* manager = new Manager(); // TODO - need to setup multiple windows simultaneous inputs
     manager -> addInstance();
 
     while (i1 -> isRunning()){
         i1 -> processInput();
     }
-
-    destroyWindow();
 
     return 0;
 }
