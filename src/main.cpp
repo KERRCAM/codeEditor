@@ -155,7 +155,7 @@ void render(){
 
     for (const auto& event : eventBuffer){
         int x = event.key.keysym.scancode;
-        SDL_Rect squareRect = { x * 5, x * 5, 50, 50 };
+        SDL_Rect squareRect = { x * 30, x * 30, 30, 30 };
         SDL_SetRenderDrawColor(renderer, x, x * 2 % 255, x * 3 % 255, 255);
         SDL_RenderFillRect(renderer, &squareRect);
     }

@@ -1,0 +1,15 @@
+
+
+TODO
+- multiple window separate input (essentially set up manager properly)
+- text rendering (will be a lot to this, will probably start simple and improve throughout)
+- sort rendering to not wipe per frame, just overwrite as needed (still buffer tho)
+- file saving and loading (open navigator)
+- terminal integration
+- UI for directory files so project can be open
+- allow for single instance multiple files open
+- add extra general UI (settings, run, git etc)
+- code highlighting
+- code suggestions (not line auto complete just stuff like variables, functions etc)
+- at this point any improvements will be minimal (extra language support, rendering upgrades etc)
+  so sort out packaging process
