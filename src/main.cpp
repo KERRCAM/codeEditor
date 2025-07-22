@@ -43,26 +43,24 @@
 
 std::vector<SDL_Event> eventBuffer;
 
-SDL_Window* window = NULL;
-SDL_Renderer* renderer = NULL;
+SDL_Window* window1 = NULL;
+SDL_Renderer* renderer1 = NULL;
+SDL_Window* window2 = NULL;
+SDL_Renderer* renderer2 = NULL;
 
-int editorRunning = 0;
+int editorRunning1 = 0;
+int editorRunning2 = 0;
 int lastFrame = 0;
 int endScreen = 0;
 
 //-----------------------------------------------------------------------------------------------//
 
-int initialize_window(void){
+int initialize_window(SDL_Window* windowPH, SDL_Renderer* rendererPH){
     /*
     Sets up code winodw.
     */
 
-    if (SDL_Init(SDL_INIT_EVERYTHING) != 0){
-        fprintf(stderr, "Error initialising SDL\n");
-        return 0;
-    }
-
-    window = SDL_CreateWindow(
+    windowPH = SDL_CreateWindow(
         "TEST BUILD",
         SDL_WINDOWPOS_CENTERED,
         SDL_WINDOWPOS_CENTERED,
@@ -71,14 +69,14 @@ int initialize_window(void){
         SDL_WINDOW_RESIZABLE
     );
 
-    if (!window){
+    if (!windowPH){
         fprintf(stderr, "Error creating SDL window\n");
         return 0;
     }
 
     // -1 for default driver, 0 for no flags
-    renderer = SDL_CreateRenderer(window, -1, 0);
-    if (!renderer){
+    rendererPH = SDL_CreateRenderer(windowPH, -1, 0);
+    if (!rendererPH){
         fprintf(stderr, "Error creating SDL renderer\n");
         return 0;
     }
@@ -96,7 +94,7 @@ void processInput(){
 
     switch (event.type){
     case SDL_QUIT:
-        editorRunning = 0;
+        editorRunning1 = 0;
         break;
     case SDL_KEYDOWN:
         eventBuffer.push_back(event);
@@ -109,7 +107,7 @@ void processInput(){
         std::cout << std::endl;
 
         if (event.key.keysym.sym == SDLK_ESCAPE){
-            editorRunning = 0;
+            editorRunning1 = 0;
         }
         break;
     }
@@ -141,24 +139,24 @@ void update(){
 
 //-----------------------------------------------------------------------------------------------//
 
-void render(){
+void render(SDL_Renderer* rendererPH){
     /*
     Handle all render calls for the game.
     */
 
     // Screen colour
-    SDL_SetRenderDrawColor(renderer, 0, 0, 60, 255);
-    SDL_RenderClear(renderer);
+    SDL_SetRenderDrawColor(rendererPH, 0, 0, 60, 255);
+    SDL_RenderClear(rendererPH);
 
 
     for (const auto& event : eventBuffer){
         int x = event.key.keysym.scancode;
         SDL_Rect squareRect = { x * 30, x * 30, 30, 30 };
-        SDL_SetRenderDrawColor(renderer, x, x * 2 % 255, x * 3 % 255, 255);
-        SDL_RenderFillRect(renderer, &squareRect);
+        SDL_SetRenderDrawColor(rendererPH, x, x * 2 % 255, x * 3 % 255, 255);
+        SDL_RenderFillRect(rendererPH, &squareRect);
     }
 
-    SDL_RenderPresent(renderer);
+    SDL_RenderPresent(rendererPH);
 
 }
 
@@ -169,8 +167,8 @@ void destroyWindow(){
     Destorys game renderer and window.
     */
 
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
+    SDL_DestroyRenderer(renderer1);
+    SDL_DestroyWindow(window1);
     SDL_Quit();
 
 }
@@ -182,14 +180,21 @@ int main(){
     Main loop.
     */
 
-    editorRunning = initialize_window();
+    if (SDL_Init(SDL_INIT_EVERYTHING) != 0){
+        fprintf(stderr, "Error initialising SDL\n");
+        return 0;
+    }
+
+    editorRunning1 = initialize_window(window1, renderer1);
+    editorRunning2 = initialize_window(window2, renderer2);
 
     setup();
 
-    while (editorRunning){
+    while (editorRunning1){
         processInput();
         update();
-        render();
+        render(renderer1);
+        render(renderer2);
     }
 
     destroyWindow();
