@@ -18,26 +18,10 @@
 class Instance{
 
 public:
-    Instance(std::string n, int w, int h, int r) : name(n), width(w), height(h), running(r) { running = initialiseWindow();}
-    int isRunning(){ return running;}
-    void processInput();
-    void render();
-    SDL_Window* window = NULL;
-    SDL_Renderer* renderer = NULL;
+
 
 private:
-    std::vector<std::string*> files;
-    std::map<std::string, std::tuple<int, int>> bpLocations;
-    std::vector<SDL_Event> eventBuffer;
-    std::string currentFile;
-    std::string name;
 
-    int width;
-    int height;
-    int running;
-
-    int initialiseWindow(void);
-    void destroyWindow();
 
 protected:
 

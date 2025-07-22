@@ -11,28 +11,12 @@
 
 //-----------------------------------------------------------------------------------------------//
 
-//int main(){
-//
-//    Instance* i1 = new Instance("i1", 800, 500, 1);
-//
-//    Manager* manager = new Manager(); // TODO - need to setup multiple windows simultaneous inputs
-//    manager -> addInstance();
-//
-//    int lastFrame = SDL_GetTicks();
-//
-//    while (i1 -> isRunning()){
-////        if (SDL_GetTicks() - lastFrame > REFRESH_RATE){
-////            i1 -> render();
-////        }
-//        SDL_RenderClear(i1 -> renderer);
-//        i1 -> processInput();
-//        SDL_RenderPresent(i1 -> renderer);
-//
-//
-//    }
-//
-//    return 0;
-//}
+int main(){
+
+    // copy code in below main into instance / manager classes
+
+    return 0;
+}
 
 //-----------------------------------------------------------------------------------------------//
 
@@ -175,32 +159,32 @@ void destroyWindow(){
 
 //-----------------------------------------------------------------------------------------------//
 
-int main(){
-    /*
-    Main loop.
-    */
-
-    if (SDL_Init(SDL_INIT_EVERYTHING) != 0){
-        fprintf(stderr, "Error initialising SDL\n");
-        return 0;
-    }
-
-    editorRunning1 = initialize_window(window1, renderer1);
-    editorRunning2 = initialize_window(window2, renderer2);
-
-    setup();
-
-    while (editorRunning1){
-        processInput();
-        update();
-        render(renderer1);
-        render(renderer2);
-    }
-
-    destroyWindow();
-
-    return 0;
-
-}
+//int main(){
+//    /*
+//    Main loop.
+//    */
+//
+//    if (SDL_Init(SDL_INIT_EVERYTHING) != 0){
+//        fprintf(stderr, "Error initialising SDL\n");
+//        return 0;
+//    }
+//
+//    editorRunning1 = initialize_window(window1, renderer1);
+//    editorRunning2 = initialize_window(window2, renderer2);
+//
+//    setup();
+//
+//    while (editorRunning1){
+//        processInput();
+//        update();
+//        render(renderer1);
+//        render(renderer2);
+//    }
+//
+//    destroyWindow();
+//
+//    return 0;
+//
+//}
 
 //-----------------------------------------------------------------------------------------------//
