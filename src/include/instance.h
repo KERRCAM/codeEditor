@@ -18,10 +18,16 @@
 class Instance{
 
 public:
-
+    Instance();
+    int initialiseWindow();
+    void renderWindow();
+    void destroyWindow();
 
 private:
-
+    SDL_Window* window = NULL;
+    SDL_Renderer* renderer = NULL;
+    int editorRunning1 = 0;
+    int lastRendered = 0;
 
 protected:
 

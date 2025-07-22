@@ -1,5 +1,5 @@
-#ifndef DRAW_H
-#define DRAW_H
+#ifndef INSTANCERENDERER_H
+#define INSTANCERENDERER_H
 #pragma once
 
 // LIBRARY IMPORTS
@@ -12,13 +12,14 @@
 //-----------------------------------------------------------------------------------------------//
 // CLASS - FUNCTIONS + ATTRIBUTES
 
-class Draw{
+class InstanceRenderer{
 
 public:
 
 
 private:
-
+    float zoom;
+    int fontSize;
 
 protected:
 

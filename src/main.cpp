@@ -35,7 +35,6 @@ SDL_Renderer* renderer2 = NULL;
 int editorRunning1 = 0;
 int editorRunning2 = 0;
 int lastFrame = 0;
-int endScreen = 0;
 
 //-----------------------------------------------------------------------------------------------//
 
