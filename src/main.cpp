@@ -46,7 +46,7 @@ std::vector<SDL_Event> eventBuffer;
 SDL_Window* window = NULL;
 SDL_Renderer* renderer = NULL;
 
-int gameRunning = 0;
+int editorRunning = 0;
 int lastFrame = 0;
 int endScreen = 0;
 
@@ -54,7 +54,7 @@ int endScreen = 0;
 
 int initialize_window(void){
     /*
-    Sets up game winodw.
+    Sets up code winodw.
     */
 
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0){
@@ -70,8 +70,6 @@ int initialize_window(void){
         WINDOW_HEIGHT,
         SDL_WINDOW_RESIZABLE
     );
-
-    SDL_WarpMouseInWindow(window, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 
     if (!window){
         fprintf(stderr, "Error creating SDL window\n");
@@ -98,7 +96,7 @@ void processInput(){
 
     switch (event.type){
     case SDL_QUIT:
-        gameRunning = 0;
+        editorRunning = 0;
         break;
     case SDL_KEYDOWN:
         eventBuffer.push_back(event);
@@ -111,7 +109,7 @@ void processInput(){
         std::cout << std::endl;
 
         if (event.key.keysym.sym == SDLK_ESCAPE){
-            gameRunning = 0;
+            editorRunning = 0;
         }
         break;
     }
@@ -181,16 +179,14 @@ void destroyWindow(){
 
 int main(){
     /*
-    Main game loop.
+    Main loop.
     */
 
-    gameRunning = initialize_window();
+    editorRunning = initialize_window();
 
     setup();
 
-    // Game loop, on player death the score pauses all updates stop, but the game continues to
-    // to render so the player can see their score and take input so they can quit the window.
-    while (gameRunning){
+    while (editorRunning){
         processInput();
         update();
         render();
